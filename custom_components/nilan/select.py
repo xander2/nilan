@@ -157,7 +157,7 @@ ATTRIBUTE_TO_SELECT = {
             "mdi:radiator",
         )
     ],
-    "get_after_heating_type": [
+    "get_after_heating_type_select": [
         Map(
             "after_heating_type",
             "set_after_heating_type",

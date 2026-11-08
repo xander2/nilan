@@ -237,6 +237,10 @@ class Device:
         _LOGGER.error("Could not read get_after_heating_type")
         return None
 
+    async def get_after_heating_type_select(self) -> int:
+        """Get after heating type for select entity."""
+        return await self.get_after_heating_type()
+
     async def get_air_heat_select(self) -> int:
         """Get heat source selection."""
         result = await self._modbus.async_pb_call(
@@ -365,17 +369,20 @@ class Device:
         _LOGGER.error("Could not read get_anode_state")
         return None
 
-    async def get_supply_air_after_heating(self) -> int:
+    async def get_supply_air_after_heating(self) -> bool:
         """Get After heating activation state."""
         result = await self._modbus.async_pb_call(
             self._unit_id, CTS602HoldingRegisters.air_heat_select_set, 1, "holding"
         )
         if result is not None:
-            return int.from_bytes(
+            value = int.from_bytes(
                 result.registers[0].to_bytes(2, "little", signed=False),
                 "little",
                 signed=False,
             )
+            if value == 0:
+                return False
+            return True
         _LOGGER.error("Could not read get_supply_air_after_heating")
         return None
 

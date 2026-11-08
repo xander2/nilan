@@ -246,6 +246,17 @@ ATTRIBUTE_TO_SENSORS = {
             True,
         )
     ],
+    "get_after_heating_type": [
+        Map(
+            "after_heating_type",
+            None,
+            None,
+            None,
+            EntityCategory.DIAGNOSTIC,
+            None,
+            True,
+        )
+    ],
     "get_time_in_control_state": [
         Map(
             "time_in_control_state",
