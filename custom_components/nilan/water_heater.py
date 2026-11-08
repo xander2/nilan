@@ -74,6 +74,8 @@ class NilanTopWaterHeater(NilanEntity, WaterHeaterEntity):
         self._attr_current_temperature = (
             await self._device.get_t11_electric_water_heater_temperature()
         )
+        if self._attr_target_temperature is None:
+            return
         running_state = await self._device.get_electric_water_heater_state()
         if running_state == 1:
             self._state = "heating"
@@ -152,6 +154,8 @@ class NilanBottomWaterHeater(NilanEntity, WaterHeaterEntity):
         self._attr_current_temperature = (
             await self._device.get_t12_compressor_water_heater_temperature()
         )
+        if self._attr_target_temperature is None:
+            return
         running_state = await self._device.get_control_state()
         if running_state in (9, 11, 17):
             self._state = "heating"

@@ -12,6 +12,7 @@ from homeassistant.components.sensor import (
 from homeassistant.const import (
     CONCENTRATION_PARTS_PER_MILLION,
     PERCENTAGE,
+    UnitOfElectricPotential,
     UnitOfTemperature,
     UnitOfTime,
 )
@@ -242,17 +243,6 @@ ATTRIBUTE_TO_SENSORS = {
             None,
             None,
             "mdi:state-machine",
-            True,
-        )
-    ],
-    "get_after_heating_type": [
-        Map(
-            "after_heating_type",
-            None,
-            None,
-            None,
-            EntityCategory.DIAGNOSTIC,
-            None,
             True,
         )
     ],
@@ -534,7 +524,7 @@ ATTRIBUTE_TO_SENSORS = {
     "get_hps_output_compvolt1": [
         Map(
             "hps_output_compvolt1",
-            None,
+            UnitOfElectricPotential.VOLT,
             SensorDeviceClass.VOLTAGE,
             SensorStateClass.MEASUREMENT,
             None,
@@ -555,7 +545,7 @@ ATTRIBUTE_TO_SENSORS = {
     ],
     "get_hps_hot_water_setpoint_actual": [
         Map(
-            "hps_hot_water_setpoint_actual",
+            "hps_water_heater_setpoint_actual",
             UnitOfTemperature.CELSIUS,
             SensorDeviceClass.TEMPERATURE,
             SensorStateClass.MEASUREMENT,

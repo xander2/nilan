@@ -175,10 +175,12 @@
             "air_filter_alarm_interval": {
                 "name": "Allarme intervallo filtro aria",
                 "state": {
+                    "0": "Pressostato",
                     "1": "30 giorni",
                     "2": "90 giorni",
                     "3": "180 giorni",
-                    "4": "360 giorni"
+                    "4": "360 giorni",
+                    "5": "70 giorni e pressostato"
                 }
             },
             "legionella_day": {
@@ -266,6 +268,15 @@
                     "1": "Elettrico",
                     "2": "Pompa di calore",
                     "3": "Entrambi"
+                }
+            },
+            "after_heating_type": {
+                "name": "Tipo postriscaldamento",
+                "state": {
+                    "0": "Nessun riscaldamento",
+                    "1": "Elettrico",
+                    "2": "Elettrico con relè binari",
+                    "3": "Acqua"
                 }
             },
             "central_heating_mode": {

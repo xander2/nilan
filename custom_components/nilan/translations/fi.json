@@ -180,10 +180,12 @@
             "air_filter_alarm_interval": {
                 "name": "Suodatinhälyytyksen Sykli",
                 "state": {
+                    "0": "Painevahti",
                     "1": "30 Päivää",
                     "2": "90 Päivää",
                     "3": "180 Päivää",
-                    "4": "360 Päivää"
+                    "4": "360 Päivää",
+                    "5": "70 Päivää ja Painevahti"
                 }
             },
             "legionella_day": {
@@ -271,6 +273,15 @@
                     "1": "Sähkövastus",
                     "2": "Lämpöpumppu",
                     "3": "Molemmat"
+                }
+            },
+            "after_heating_type": {
+                "name": "Jälkilämmityksen Tyyppi",
+                "state": {
+                    "0": "Ei Lämmitintä",
+                    "1": "Sähköinen",
+                    "2": "Sähköinen, Releistetty",
+                    "3": "Vesi"
                 }
             },
             "central_heating_mode": {
@@ -404,7 +415,8 @@
                 "2": "Tulo",
                 "3": "Poisto",
                 "4": "Ulkoinen Siirto",
-                "5": "Ilmanvaihto"
+                "5": "Ilmanvaihto",
+                "6": "Liesikupu"
             }
         },
         "user_function_2_mode": {

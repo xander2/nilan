@@ -495,10 +495,10 @@ ATTRIBUTE_TO_NUMBERS = {
             "set_supply_heater_delay",
             EntityCategory.CONFIG,
             0,
-            30,
+            60,
             1,
             NumberMode.BOX,
-            UnitOfTime.SECONDS,
+            UnitOfTime.MINUTES,
             "mdi:wrench-clock",
         )
     ],

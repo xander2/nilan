@@ -18,7 +18,7 @@ ATTRIBUTE_TO_SELECT = {
             "air_filter_alarm_interval",
             "set_air_filter_alarm_interval",
             EntityCategory.CONFIG,
-            ["1", "2", "3", "4"],
+            ["0", "1", "2", "3", "4", "5"],
             "mdi:air-filter",
         )
     ],
@@ -157,6 +157,15 @@ ATTRIBUTE_TO_SELECT = {
             "mdi:radiator",
         )
     ],
+    "get_after_heating_type": [
+        Map(
+            "after_heating_type",
+            "set_after_heating_type",
+            EntityCategory.CONFIG,
+            ["0", "1", "2", "3"],
+            "mdi:radiator",
+        )
+    ],
     "get_central_heat_select": [
         Map(
             "central_heating_mode",
@@ -171,7 +180,7 @@ ATTRIBUTE_TO_SELECT = {
             "heat_source_select",
             "set_air_heat_select",
             EntityCategory.CONFIG,
-            ["0", "1"],
+            ["0", "1", "2", "3", "4"],
             "mdi:radiator",
         )
     ],
@@ -225,7 +234,7 @@ ATTRIBUTE_TO_SELECT = {
             "user_function_1_mode",
             "set_user_function_1_mode",
             EntityCategory.CONFIG,
-            ["0", "1", "2", "3", "4", "5"],
+            ["0", "1", "2", "3", "4", "5", "6"],
             None,
         )
     ],
@@ -366,7 +375,8 @@ class NilanCTS602Select(SelectEntity, NilanEntity):
 
     async def async_update(self) -> None:
         """Fetch new state data for the select."""
-        self._attr_current_option = str(await getattr(self._device, self._attribute)())
+        value = await getattr(self._device, self._attribute)()
+        self._attr_current_option = str(value) if value is not None else None
 
 
 class NilanCTS602AlarmSelect(SelectEntity, NilanEntity):
@@ -416,11 +426,11 @@ class NilanCTS602AlarmSelect(SelectEntity, NilanEntity):
         option1 = await getattr(self._device, self._attribute_1)()
         option2 = await getattr(self._device, self._attribute_2)()
         option3 = await getattr(self._device, self._attribute_3)()
-        if option1 != 0:
+        if option1 is not None and option1 != 0:
             options.append(str(option1))
-        if option2 != 0:
+        if option2 is not None and option2 != 0:
             options.append(str(option2))
-        if option3 != 0:
+        if option3 is not None and option3 != 0:
             options.append(str(option3))
         if len(options) > 1:
             options.append(str(self._all_alarms_code))

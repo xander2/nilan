@@ -176,10 +176,12 @@
           "air_filter_alarm_interval": {
               "name": "Alarmintervall for luftfilter",
               "state": {
+                  "0": "Trykkvakt",
                   "1": "30 dager",
                   "2": "90 dager",
                   "3": "180 dager",
-                  "4": "360 dager"
+                  "4": "360 dager",
+                  "5": "70 dager og trykkvakt"
               }
           },
           "legionella_day": {
@@ -267,6 +269,15 @@
                   "1": "Elektrisk",
                   "2": "Varmepumpe",
                   "3": "Begge"
+              }
+          },
+          "after_heating_type": {
+              "name": "Ettervarmetype",
+              "state": {
+                  "0": "Ingen varmer",
+                  "1": "Elektrisk",
+                  "2": "Elektrisk på binærrelé",
+                  "3": "Vann"
               }
           },
           "central_heating_mode": {

@@ -165,8 +165,8 @@ class CTS602InputRegisters:
 
     alarm_event_log_id = 3050
     alarm_log_date = 3051
-    alarm_log_t1 = 3052
-    alarm_log_t2 = 3053
+    alarm_log_time = 3052
+    alarm_log_t1 = 3053
     alarm_log_t3 = 3054
     alarm_log_t4 = 3055
     alarm_log_t5 = 3056
@@ -227,7 +227,7 @@ class CTS602InputRegisters:
 class CTS602HoldingRegisters:
     """Nilan CTS602 Holding Registers."""
 
-    bus_address = 50
+    bus_address = 0
 
     output_air_flap = 100
     output_smoke_flap = 101

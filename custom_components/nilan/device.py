@@ -558,7 +558,7 @@ class Device:
                 "little",
                 signed=False,
             )
-        _LOGGER.error("Could not read get_fan_startup_delay")
+        _LOGGER.error("Could not read get_actual_vent_set")
         return None
 
     async def get_supply_fan_level(self) -> int:
@@ -1142,7 +1142,7 @@ class Device:
     async def get_hps_t22_shw_bottom_temperature(self) -> float:
         """Get HPS T22 SHW Bottom Temperature."""
         result = await self._modbus.async_pb_call(
-            self._unit_id, CTS602InputRegisters.hps_input_t22_shw_bottom, 1, "input"
+            self._unit_id, CTS602InputRegisters.hps_input_t22_shw_bot, 1, "input"
         )
         if result is not None:
             value = int.from_bytes(
@@ -2925,7 +2925,7 @@ class Device:
 
     async def set_cooling_mode_ventilation_step(self, mode: int) -> bool:
         """Set cooling mode ventilation level."""
-        if mode in (0, 2, 3, 4):
+        if mode in (0, 1, 2, 3, 4):
             await self._modbus.async_pb_call(
                 self._unit_id,
                 CTS602HoldingRegisters.air_flow_cool_vent,
@@ -2937,7 +2937,7 @@ class Device:
 
     async def set_cooling_setpoint(self, mode: int) -> bool:
         """Set cooling setpoint offset."""
-        if mode in (0, 2, 3, 4, 5, 6, 7, 8):
+        if mode in (0, 1, 2, 3, 4, 5, 6, 7, 8):
             await self._modbus.async_pb_call(
                 self._unit_id,
                 CTS602HoldingRegisters.air_temp_cool_set,
@@ -3127,6 +3127,18 @@ class Device:
             return True
         return False
 
+    async def set_after_heating_type(self, mode: int) -> bool:
+        """Set after heating type."""
+        if mode in (0, 1, 2, 3):
+            await self._modbus.async_pb_call(
+                self._unit_id,
+                CTS602HoldingRegisters.air_heat_type,
+                [mode],
+                "write_registers",
+            )
+            return True
+        return False
+
     async def set_pre_heater_defrost_select(self, mode: int) -> bool:
         """Set Select anti frost also during evap. defrost."""
         if mode in (0, 1):
@@ -3201,7 +3213,7 @@ class Device:
 
     async def set_hmi_language(self, mode: int) -> bool:
         """Set HMI Language."""
-        if mode in (0, 1, 2, 3, 4, 5, 6, 7):
+        if mode in (0, 1, 2, 3, 4, 5, 6, 7, 8, 9):
             await self._modbus.async_pb_call(
                 self._unit_id,
                 CTS602HoldingRegisters.user_language,
@@ -3396,7 +3408,7 @@ class Device:
         if value >= 15 and value <= 720:
             await self._modbus.async_pb_call(
                 self._unit_id,
-                CTS602HoldingRegisters.defrost_dur_max_cpr,
+                CTS602HoldingRegisters.defrost_block_minutes,
                 [value],
                 "write_registers",
             )
@@ -3405,7 +3417,7 @@ class Device:
 
     async def set_supply_heater_delay(self, value: int) -> bool:
         """Set supply heater delay in m."""
-        if value >= 0 and value <= 30:
+        if value >= 0 and value <= 60:
             await self._modbus.async_pb_call(
                 self._unit_id,
                 CTS602HoldingRegisters.air_heat_delay,
@@ -3535,7 +3547,7 @@ class Device:
 
     async def set_ch_max_supply_temperature(self, value: float):
         """Set max supply temperature."""
-        if value >= 0 and value <= 100:
+        if value >= 5 and value <= 70:
             value = int(value * 100)
             output = int.from_bytes(
                 value.to_bytes(2, "little", signed=True), "little", signed=False
@@ -3677,7 +3689,7 @@ class Device:
         """Set low outdoor temperature ventilation temperature setpoint."""
         if value >= -20 and value <= 10:
             value = int.from_bytes(
-                value.to_bytes(2, "little", signed=True), "little", signed=False
+                int(value).to_bytes(2, "little", signed=True), "little", signed=False
             )
             await self._modbus.async_pb_call(
                 self._unit_id,
@@ -3773,7 +3785,7 @@ class Device:
         if value >= 5 and value <= 30:
             await self._modbus.async_pb_call(
                 self._unit_id,
-                CTS602HoldingRegisters.program_user_temp_set,
+                CTS602HoldingRegisters.program_user_2_temp_set,
                 [value],
                 "write_registers",
             )
@@ -3782,7 +3794,7 @@ class Device:
         """Set user function 1 offset."""
         if value >= -10 and value <= 10:
             output = int.from_bytes(
-                value.to_bytes(2, "little", signed=True), "little", signed=False
+                int(value).to_bytes(2, "little", signed=True), "little", signed=False
             )
             await self._modbus.async_pb_call(
                 self._unit_id,
@@ -3795,7 +3807,7 @@ class Device:
         """Set user function 2 offset."""
         if value >= -10 and value <= 10:
             output = int.from_bytes(
-                value.to_bytes(2, "little", signed=True), "little", signed=False
+                int(value).to_bytes(2, "little", signed=True), "little", signed=False
             )
             await self._modbus.async_pb_call(
                 self._unit_id,
@@ -3809,7 +3821,7 @@ class Device:
         if value >= 0 and value <= 25:
             await self._modbus.async_pb_call(
                 self._unit_id,
-                CTS602HoldingRegisters.air_qual_time_out,
+                CTS602HoldingRegisters.central_heat_reg_time,
                 [value],
                 "write_registers",
             )

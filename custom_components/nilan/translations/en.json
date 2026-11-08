@@ -183,10 +183,12 @@
             "air_filter_alarm_interval": {
                 "name": "Air Filter Alarm Interval",
                 "state": {
+                    "0": "Pressure Guard",
                     "1": "30 Days",
                     "2": "90 Days",
                     "3": "180 Days",
-                    "4": "360 Days"
+                    "4": "360 Days",
+                    "5": "70 Days and Pressure Guard"
                 }
             },
             "legionella_day": {
@@ -274,6 +276,15 @@
                     "1": "Electric",
                     "2": "Heat Pump",
                     "3": "Both"
+                }
+            },
+            "after_heating_type": {
+                "name": "After Heating Type",
+                "state": {
+                    "0": "No Heater",
+                    "1": "Electrical",
+                    "2": "Electric on Binary Relays",
+                    "3": "Water"
                 }
             },
             "central_heating_mode": {
@@ -471,7 +482,8 @@
                 "2": "Supply Air",
                 "3": "Extract Air",
                 "4": "External Offset",
-                "5": "Ventilate"
+                "5": "Ventilate",
+                "6": "Cooker Hood"
             }
         },
         "user_function_2_mode": {

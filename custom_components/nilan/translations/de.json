@@ -169,16 +169,26 @@
           "central_heating_min_supply_temperature": {"name": "Zentralheizung Min. Versorgungstemperatur"},
           "central_heating_max_supply_temperature": {"name": "Zentralheizung max. Versorgungstemperatur"},
           "outdoor_temperature_compensation_curve": {"name": "Außentemperatur-Kompensationskurve"},
-          "supply_heater_delay": {"name": "Verzögerung der Versorgungsheizung"}
+          "supply_heater_delay": {"name": "Verzögerung der Versorgungsheizung"},
+          "hps_water_heater_setpoint": {"name": "AIR/GEO Warmwasser-Sollwert"},
+          "hps_heating_setpoint_min": {"name": "AIR/GEO Vorlauftemperatur-Sollwert"},
+          "user_selection_1_duration": {"name": "Benutzer Auswahl 1 Dauer"},
+          "user_selection_2_duration": {"name": "Benutzer Auswahl 2 Dauer"},
+          "user_selection_1_room_temperature": {"name": "Benutzer Auswahl 1 Raumtemperatur"},
+          "user_selection_2_room_temperature": {"name": "Benutzer Auswahl 2 Raumtemperatur"},
+          "user_selection_1_offset_temperature": {"name": "Benutzer Auswahl 1 Temperatur-Offset"},
+          "user_selection_2_offset_temperature": {"name": "Benutzer Auswahl 2 Temperatur-Offset"}
         },
         "select": {
             "air_filter_alarm_interval": {
                 "name": "Luftfilter-Alarmintervall",
                 "state": {
+                    "0": "Druckwächter",
                     "1": "30 Tage",
                     "2": "90 Tage",
                     "3": "180 Tage",
-                    "4": "360 Tage"
+                    "4": "360 Tage",
+                    "5": "70 Tage und Druckwächter"
                 }
             },
             "legionella_day": {
@@ -268,6 +278,15 @@
                     "3": "Beides"
                 }
             },
+            "after_heating_type": {
+                "name": "Nachheizungsregister Typ",
+                "state": {
+                    "0": "kein Nachheizregister",
+                    "1": "Elektrisch",
+                    "2": "Elektrisch auf Binärrelais",
+                    "3": "Wasser"
+                }
+            },
             "central_heating_mode": {
                 "name": "Zentral Heizungsmodus",
                 "state": {
@@ -317,6 +336,14 @@
                     "0": "Gesperrt",
                     "1": "Offen",
                     "2": "Ausschalter deaktivieren"
+                }
+            },
+            "hps_season_mode": {
+                "name": "AIR/GEO Saisonmodus",
+                "state": {
+                    "0": "Sommer",
+                    "1": "Winter",
+                    "2": "Auto"
                 }
             },
             "reset_alarm": {
@@ -389,6 +416,98 @@
                     "95": "E95 Software Update zurückgewiesen",
                     "96": "E96 Selbsttest-Dämpferfehler",
                     "255": "Alle Alarme"
+                }
+            },
+            "reset_hps_alarm": {
+                "name": "AIR/GEO Alarm zurücksetzen",
+                "state": {
+                    "100": "E100 THeatSup Open",
+                    "101": "E101 THeatSup Short",
+                    "102": "E102 THeatRet Open",
+                    "103": "E103 THeatRet Short",
+                    "104": "E104 TWaterTa Open",
+                    "105": "E105 TWaterTa Short",
+                    "106": "E106 Tamb Open",
+                    "107": "E107 Tamb Short",
+                    "108": "E108 Troom Open",
+                    "109": "E109 Troom Short",
+                    "110": "E110 THeatTank Open",
+                    "111": "E111 THeatTank Short",
+                    "112": "E112 TColdSup Open",
+                    "113": "E113 TColdSup Short",
+                    "114": "E114 TColdRet Open",
+                    "115": "E115 TColdRet Short",
+                    "116": "E116 Tevap Open",
+                    "117": "E117 Tevap Short",
+                    "122": "E122 Tmixing Open",
+                    "123": "E123 Tmixing Short",
+                    "124": "E124 SHW T-sensor Open",
+                    "125": "E125 SHW T-sensor Short",
+                    "126": "E126 SHW anode",
+                    "127": "E127 TPres open",
+                    "128": "E128 TPres short",
+                    "200": "E200 LOM309 missing",
+                    "600": "E600 Hi Pres",
+                    "601": "E601 Low pres.",
+                    "602": "E602 Leakage",
+                    "603": "E603 Hi press",
+                    "604": "E604 Frost protection",
+                    "605": "E605 Heat pump overheat",
+                    "607": "E607 Legionella failed",
+                    "608": "E608 FC alarm",
+                    "609": "E609 FC alarm",
+                    "610": "E610 Tevap Low",
+                    "611": "E611 Tevap Low",
+                    "612": "E612 TMIX to High",
+                    "613": "E613 Tmix High Rep",
+                    "614": "E614 Cooling low",
+                    "615": "E615 El heater",
+                    "904": "E904 Datalog",
+                    "905": "E905 Database",
+                    "907": "E907 RTC err",
+                    "908": "E908 RTC inv",
+                    "909": "E909 LUP SW version",
+                    "910": "E910 Slave communication error",
+                    "995": "E995 SW Rejected",
+                    "998": "E998 TestVer",
+                    "999": "E999 Manual mode",
+                    "65535": "Alle Alarme"
+                }
+            },
+            "user_function_1_mode": {
+                "name": "Benutzer Auswahl 1 Programm",
+                "state": {
+                    "0": "Keine",
+                    "1": "Erweitert",
+                    "2": "Zuluft",
+                    "3": "Abluft",
+                    "4": "Externer Offset",
+                    "5": "Lüften",
+                    "6": "Dunstabzugshaube"
+                }
+            },
+            "user_function_2_mode": {
+                "name": "Benutzer Auswahl 2 Programm",
+                "state": {
+                    "0": "Keine",
+                    "1": "Erweitert",
+                    "2": "Zuluft",
+                    "3": "Abluft",
+                    "4": "Externer Offset",
+                    "5": "Lüften",
+                    "6": "Dunstabzugshaube"
+                }
+            },
+            "user_selection_1_fan_speed_level": {
+                "name": "Benutzer Auswahl 1 Lüfterstufe",
+                "state": {
+                    "0": "Aus"
+                }
+            },
+            "user_selection_2_fan_speed_level": {
+                "name": "Benutzer Auswahl 2 Lüfterstufe",
+                "state": {
+                    "0": "Aus"
                 }
             }
         },
@@ -484,10 +603,58 @@
           "supply_fan_speed": {"name": "Zuluftventilator Geschwindigkeit"},
           "display_text_line_1": {"name": "Display Text Zeile 1"},
           "display_text_line_2": {"name": "Display Text Zeile 2"},
-          "modbus_version": {"name": "ModBus Version"}
+          "modbus_version": {"name": "ModBus Version"},
+          "hps_compressor_capacity": {"name": "AIR/GEO Kompressorleistung"},
+          "hps_heat_pump_state": {
+              "name": "AIR/GEO Wärmepumpenstatus",
+              "state": {
+                  "0": "Aus",
+                  "1": "Bereit",
+                  "2": "Warmwasser Start",
+                  "3": "Warmwasser",
+                  "4": "Heizen Start",
+                  "5": "Heizen",
+                  "6": "Wärmepumpe Stop",
+                  "7": "Elektrisches Heizen",
+                  "8": "Elektrisches Warmwasser",
+                  "9": "Erzwungene Kältepumpe",
+                  "10": "Wärmepumpe Stop",
+                  "11": "Abtauen",
+                  "12": "Luftabtauen",
+                  "13": "Heißgasabtauen",
+                  "14": "Abtropfverzögerung",
+                  "15": "Warmwasser - Wärmepumpe Stop",
+                  "16": "Heizen - Wärmepumpe Stop",
+                  "17": "Stop",
+                  "18": "Heizen - Wärmepumpe Stop",
+                  "19": "Warmwasser - Wärmepumpe Stop",
+                  "20": "Pumpenübung",
+                  "21": "Erzwungener Start",
+                  "22": "Erzwungener Betrieb",
+                  "23": "Erzwungener Betrieb",
+                  "24": "Erzwungener Betrieb - Wärmepumpe Stop",
+                  "25": "Manuell",
+                  "26": "Kühlen Start",
+                  "27": "Kühlen",
+                  "28": "Externer Stop",
+                  "29": "Erzwungene niedrige Drehzahl"
+              }
+            },
+            "hps_t16_return_temperature": {"name": "AIR/GEO Rücklauftemperatur (T16)"},
+            "hps_t17_supply_temperature": {"name": "AIR/GEO Vorlauftemperatur (T17)"},
+            "hps_t18_tank_temperature": {"name": "AIR/GEO Pufferspeichertemperatur (T18)"},
+            "hps_t20_ambient_temperature": {"name": "AIR/GEO Außentemperatur (T20)"},
+            "hps_t21_shw_top_temperature": {"name": "AIR/GEO Warmwasser oben Temperatur (T21)"},
+            "hps_t22_shw_bottom_temperature": {"name": "AIR/GEO Warmwasser unten Temperatur (T22)"},
+            "hps_t35_pressure_pipe_temperature": {"name": "AIR/GEO Druckrohrtemperatur (T35)"},
+            "hps_output_compvolt1": {"name": "AIR/GEO Kompressorspannung"},
+            "hps_alarms_active": {"name": "AIR/GEO Aktive Alarme"},
+            "hps_water_heater_setpoint_actual": {"name": "AIR/GEO Warmwasser-Sollwert aktuell"},
+            "hps_heating_setpoint_actual": {"name": "AIR/GEO Heizung-Sollwert aktuell"}
         },
         "switch": {
-          "supply_air_after_heating": {"name": "Zuluftventilator nach Heizregister"}
+          "supply_air_after_heating": {"name": "Zuluftventilator nach Heizregister"},
+          "hps_main_switch": {"name": "AIR/GEO Hauptschalter"}
         },
         "water_heater": {
           "top_water_heater": {
