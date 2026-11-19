@@ -113,7 +113,6 @@ class NilanClimate(NilanEntity, ClimateEntity):
         self._attr_min_temp = 5
         self._attr_max_temp = 30
         self._attr_target_temperature_step = 1
-        self._enable_turn_on_off_backwards_compatibility = False
         self._attr_hvac_modes = [
             HVACMode.COOL,
             HVACMode.HEAT,
@@ -122,7 +121,7 @@ class NilanClimate(NilanEntity, ClimateEntity):
         ]
         self._attr_preset_modes = ["energy", "comfort", "water"]
         self._attr_fan_modes = ["0", "1", "2", "3", "4"]
-        self._attr_temperature_unit = UnitOfTemperature.CELSIUS
+        self._attr_native_temperature_unit = UnitOfTemperature.CELSIUS
         self._attr_supported_features = supported_featrures
         self._extra_status_attributes = extra_status_attributes
 
@@ -164,10 +163,10 @@ class NilanClimate(NilanEntity, ClimateEntity):
         self._attr_fan_mode = str(await self._device.get_ventilation_step())
 
         if self._attr_supported_features & ClimateEntityFeature.TARGET_TEMPERATURE:
-            self._attr_target_temperature = (
+            self._attr_native_target_temperature = (
                 await self._device.get_user_temperature_setpoint()
             )
-            self._attr_current_temperature = (
+            self._attr_native_current_temperature = (
                 await self._device.get_control_temperature()
             )
 
